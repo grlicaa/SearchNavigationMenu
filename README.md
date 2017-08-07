@@ -13,8 +13,9 @@ https://https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU
 <li>Add region on global page.
 (Region must be on page but you can hide it with style="display:none;" in "Custom Attributes")</li>
 <li>Add SearchNavigationMenu [Plug-in] item to the region.</li>
-<li>Decide behavior and style of the item (or leave default values).<br/>
-![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Settings.png<br/>
+<li>Decide behavior and style of the item (or leave default values).
+
+![ ](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Settings.png)
 </li>
 <li>Save changes. Search Navigation Menu is now ready to use.</li>
 <li>Please leave same feedback. Thanks</li>
