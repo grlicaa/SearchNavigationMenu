@@ -1,0 +1,41 @@
+/*! searchNavMenu.css v1.1 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
+/* ==========================================================================
+   Version : 1.1
+   -------------------------------------------------------------------------------
+   Date : 05.08.2017
+   -------------------------------------------------------------------------------
+   Description
+	Used for Searching Navigation Menu Style Sheet in Oracle Application Express
+   ------------------------------------------------------------------------------- 
+*/ 
+
+
+.srch_nav {
+	position:relative;
+    width:95%;
+	margin: 4px;	
+}
+
+.srch_icon {
+	font-size: 20px;
+}
+
+.srch_nav span {
+	position: absolute;
+	display: block;
+	left: 7px;
+	top: 7px;
+	font-size: 20px;
+}
+.srch_nav input {
+	width: 100%;
+	margin:2px;
+	padding: 3px 2px 3px 25px;
+	border: 1px solid; 
+	display: block;
+	border-radius: 4px;
+	transition: 0.2s ease-out;
+}
+.srch_nav input:focus {
+	outline: 0;
+}
