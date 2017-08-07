@@ -15,7 +15,7 @@
     "url" : "https://github.com/grlicaa/SearchNavigationMenu.git"
   },
   "oracle" : {
-    "versions" : ["11.2.0.1", "12.1.0.1", "12.2.0.1"],
+    "versions" : ["12.2.0.1", "12.1.0.1", "11.2.0.1"],
     "apex" : {
       "versions" : ["5.1.0", "5.1.2"],
       "plugin" : {
