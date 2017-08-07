@@ -2,7 +2,7 @@
 
 ## Demo
 A demo application is available on apex.oracle.com<br/>
-https://https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU
+https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU
 
 ## Preview
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview.gif)
