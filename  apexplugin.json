@@ -1,0 +1,28 @@
+{
+  "name" : "Search Navigation Menu",
+  "version" : "1.0",
+  "description" : "Oracle Application Express item Plug-in for search on Navigation Menu.",
+  "keywords" : ["search", "navigation", "menu", "list"],
+  "homepage" : "https://github.com/grlicaa/SearchNavigationMenu",
+  "license" : "MIT",
+  "author" : {
+    "name" : "Andrej Grlica",
+    "email" : "andrej.grlica@gmail.com",
+    "twitter" : "AndrejGrlica",
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/grlicaa/SearchNavigationMenu"
+  },
+  "oracle" : {
+    "apex" : {
+      "versions" : ["5.1.0", "5.1.2"],
+      "plugin" : {
+        "internalName" : "item_type_plugin_si_abakus_searchnavigationmenu.sql",
+        "type" : "item",
+        "demo" : "https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU",
+        "previewImage" : "https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview.gif"
+      }
+    }
+  }
+}
