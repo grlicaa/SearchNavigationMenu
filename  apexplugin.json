@@ -12,13 +12,13 @@
   },
   "repository" : {
     "type" : "git",
-    "url" : "https://github.com/grlicaa/SearchNavigationMenu"
+    "url" : "https://github.com/grlicaa/SearchNavigationMenu.git"
   },
   "oracle" : {
     "apex" : {
       "versions" : ["5.1.0", "5.1.2"],
       "plugin" : {
-        "internalName" : "item_type_plugin_si_abakus_searchnavigationmenu.sql",
+        "internalName" : "si_abakus_searchnavigationmenu.sql",
         "type" : "item",
         "demo" : "https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU",
         "previewImage" : "https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview.gif"
