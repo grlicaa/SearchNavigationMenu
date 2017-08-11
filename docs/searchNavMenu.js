@@ -1,27 +1,32 @@
 /*! searchNavMenu.js v1.0 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
 /* ==========================================================================
-   Version : 1.0
+   Version : 1.1
    -------------------------------------------------------------------------------
-   Date : 05.08.2017
-   -------------------------------------------------------------------------------
+   Date Updated : 11.08.2017
+   -----------------------------------------------------
    Description
 	Script is used for Searching Navigation Menu in Oracle Application Express
    -------------------------------------------------------------------------------
    Parametrs : 
      item_id : item id from apex
- 
+     menuOpen : (is menu on load open) true/false
+	 elm : object
+	 e: event
+	 ajaxIdentifier: name of ajax call function
+	 l_skey : character keypress focus on search
 */ 
 
 var SrchNavMenuClosed = false;
 
-
-function LoadSearchNavSubmenu(item_id) {
-	if (!$("#t_Button_navControl").hasClass("is-active"))
+function LoadSearchNavSubmenu(item_id, menuOpen) {
+	if (!apex.theme42.toggleWidgets.isExpanded("nav"))
 		SrchNavMenuClosed=true;
     openAllNavSubmenus();
 	$('li[id^="t_TreeNav"].is-collapsible').find('span.a-TreeView-toggle').click(); 
 	//Because all list were open and last one closed we need to open current list
 	setCurrentNav(item_id);
+	if (menuOpen)
+		$('li[id^="t_TreeNav"]').find("ul").css("display", "block");
 }
 
 function openAllNavSubmenus(elm) {
@@ -45,8 +50,8 @@ function setCurrentNav(item_id) {
            $(this).find("div.a-TreeView-row").removeClass("is-selected");
     });
 	if (SrchNavMenuClosed)
-		$("#t_Button_navControl").click();
-	else
+		$('#t_Button_navControl').click();
+    else
 		showHideSearchBar(item_id);
 }
 
@@ -56,27 +61,23 @@ function saveSesSateNav(ajaxIdentifier, newVal) {
     }, {dataType:"text", 
        success: function( pData ) {
          apex.debug.info("Saved session state."); 
-		 console.log("Saved session state."+JSON.stringify(pData)); 
        },
        error: function( pData ) {
          apex.debug.error("Save session state for Search Navigation failed :"+JSON.stringify(pData) ); 
-		 console.log("Save session state for Search Navigation failed :"+JSON.stringify(pData) ); 
        }	   
     }); 
 }
 
 	   
 function showHideSearchBar(item_id) {
-  if ($("#t_Button_navControl").hasClass("is-active")) {
+  if (apex.theme42.toggleWidgets.isExpanded("nav")) {
     $('div[id="'+item_id+'"]').show();
-    $('input.srch_input').trigger("keyup");
-	SrchNavMenuClosed = false;
+    $('input.srch_input').trigger("keyup", [true]);
   }
   else {
-	$('input.srch_input').trigger("keyup");
+	$('input.srch_input').trigger("keyup", [true]);
     $('div[id="'+item_id+'"]').hide();  
     $('li[id^="t_TreeNav"].is-expandable').find("ul").css("display", "none");
-	SrchNavMenuClosed = true;
   }
 }
 
@@ -149,9 +150,11 @@ function keyDownSearchNav(e) {
 		   }
 }
 
-function keyUpSearchNav(elm, e, ajaxIdentifier, save_ss) {
+//elm= input, e=event, ajaxIdentifier=name of ajaxProcedure, save_ss parameter on/off, paegeEvent=keyup of hide/show
+function keyUpSearchNav(elm, e, ajaxIdentifier, save_ss, pageEvent) {
 	switch (e.which) {
 	   case 13:
+	   case 17:
 	   case 40:
 	   case 38:
 		   e.preventDefault();
@@ -180,7 +183,7 @@ function keyUpSearchNav(elm, e, ajaxIdentifier, save_ss) {
 			  $(this).css("display", "block");
 		   });
 		}        
-		if (save_ss)
+		if (save_ss && !pageEvent)
 			saveSesSateNav(ajaxIdentifier,elmVal); 
 		hoverSearchNav();
 	}    
@@ -188,8 +191,8 @@ function keyUpSearchNav(elm, e, ajaxIdentifier, save_ss) {
 		 
 function shortCutSearchNav(e, l_skey) {
 	if(e.ctrlKey && e.keyCode === l_skey.charCodeAt(0)){ 
-		if (SrchNavMenuClosed)
-			$("#t_Button_navControl").click();
+		if (!apex.theme42.toggleWidgets.isExpanded("nav"))
+			$('#t_Button_navControl').click();
 		var tmp = $("input.srch_input").val();
 		$("input.srch_input").focus().val(tmp);
 		e.preventDefault();
