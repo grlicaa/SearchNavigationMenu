@@ -2,7 +2,15 @@
 
 ## Demo
 A demo application is available on apex.oracle.com<br/>
-https://https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU
+https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU
+
+## Changelog
+V 1.1. 
+<ul>
+<li>Resolved Bug 25592396 Item Type plug-in uses render function name for Ajax call Apex 5.1.0</li>
+<li>Resolved problem on smartphones when windowresize navigation menu is closed.</li>
+<li>Added new attribute "Navigation menu open". </li>
+</ul>
 
 ## Preview
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview.gif)
