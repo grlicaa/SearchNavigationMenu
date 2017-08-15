@@ -5,6 +5,12 @@ A demo application is available on apex.oracle.com<br/>
 https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU
 
 ## Changelog
+V 1.2.
+<ul>
+<li>CSS added body action and not JS changing "display"</li>
+<li>Added new function JS regarding to 'isExpanded("nav")' error</li>
+<li>On resize if tree is clapsed then close all opened sub lists</li>
+</ul>
 V 1.1. 
 <ul>
 <li>Resolved Bug 25592396 Item Type plug-in uses render function name for Ajax call Apex 5.1.0</li>
