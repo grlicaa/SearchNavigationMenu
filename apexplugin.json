@@ -1,6 +1,6 @@
 {
   "name" : "Search Navigation Menu",
-  "version" : "1.0",
+  "version" : "1.2",
   "description" : "Oracle Application Express item Plug-in for search on Navigation Menu.",
   "keywords" : ["search", "navigation", "menu", "list"],
   "homepage" : "https://github.com/grlicaa/SearchNavigationMenu",
