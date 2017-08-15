@@ -1,8 +1,6 @@
-/*! searchNavMenu.css v1.1 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
+/*! searchNavMenu.css v1.2 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
 /* ==========================================================================
-   Version : 1.1
-   -------------------------------------------------------------------------------
-   Date : 05.08.2017
+   Date : 15.08.2017
    -------------------------------------------------------------------------------
    Description
 	Used for Searching Navigation Menu Style Sheet in Oracle Application Express
@@ -39,3 +37,13 @@
 .srch_nav input:focus {
 	outline: 0;
 }
+
+body.js-navCollapsed div.srch_nav  {
+	display:none;
+}
+
+body.js-navExpanded div.srch_nav  {
+	display:block;
+}
+
+

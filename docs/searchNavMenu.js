@@ -1,9 +1,5 @@
-/*! searchNavMenu.js v1.0 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
+/*! searchNavMenu.js v1.2 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
 /* ==========================================================================
-   Version : 1.1
-   -------------------------------------------------------------------------------
-   Date Updated : 11.08.2017
-   -----------------------------------------------------
    Description
 	Script is used for Searching Navigation Menu in Oracle Application Express
    -------------------------------------------------------------------------------
@@ -19,14 +15,14 @@
 var SrchNavMenuClosed = false;
 
 function LoadSearchNavSubmenu(item_id, menuOpen) {
-	if (!apex.theme42.toggleWidgets.isExpanded("nav"))
+	if (!isNavTreeOpen())
 		SrchNavMenuClosed=true;
     openAllNavSubmenus();
 	$('li[id^="t_TreeNav"].is-collapsible').find('span.a-TreeView-toggle').click(); 
 	//Because all list were open and last one closed we need to open current list
 	setCurrentNav(item_id);
 	if (menuOpen)
-		$('li[id^="t_TreeNav"]').find("ul").css("display", "block");
+		showAllSublistsSearchNav();
 }
 
 function openAllNavSubmenus(elm) {
@@ -55,6 +51,14 @@ function setCurrentNav(item_id) {
 		showHideSearchBar(item_id);
 }
 
+function isNavTreeOpen() {
+	if (apex.theme42.toggleWidgets.isExpanded("nav") == null) {
+		return $('body').hasClass('js-navExpanded');		
+	} 
+	else
+		return apex.theme42.toggleWidgets.isExpanded("nav");
+}
+
 function saveSesSateNav(ajaxIdentifier, newVal) {
 	apex.server.plugin( ajaxIdentifier, {
     x01: newVal
@@ -70,15 +74,20 @@ function saveSesSateNav(ajaxIdentifier, newVal) {
 
 	   
 function showHideSearchBar(item_id) {
-  if (apex.theme42.toggleWidgets.isExpanded("nav")) {
-    $('div[id="'+item_id+'"]').show();
+  if (isNavTreeOpen()) {
     $('input.srch_input').trigger("keyup", [true]);
   }
   else {
 	$('input.srch_input').trigger("keyup", [true]);
-    $('div[id="'+item_id+'"]').hide();  
-    $('li[id^="t_TreeNav"].is-expandable').find("ul").css("display", "none");
+	hideAllSublistsSearchNav();
   }
+}
+
+function hideAllSublistsSearchNav() {
+	$('li[id^="t_TreeNav"].is-expandable').find("ul").css("display", "none");
+}
+function showAllSublistsSearchNav() {
+	$('li[id^="t_TreeNav"].is-expandable').find("ul").css("display", "block");
 }
 
 function colorSearchNav(txt, rplStr) {
@@ -188,14 +197,23 @@ function keyUpSearchNav(elm, e, ajaxIdentifier, save_ss, pageEvent) {
 		hoverSearchNav();
 	}    
 }
-		 
+
 function shortCutSearchNav(e, l_skey) {
 	if(e.ctrlKey && e.keyCode === l_skey.charCodeAt(0)){ 
-		if (!apex.theme42.toggleWidgets.isExpanded("nav"))
+		if (!isNavTreeOpen())
 			$('#t_Button_navControl').click();
 		var tmp = $("input.srch_input").val();
 		$("input.srch_input").focus().val(tmp);
 		e.preventDefault();
 		return false;
 	}	
+}
+
+function onResizeWinSearchNav() {
+	if ($("input.srch_input").is(":focus"))
+               apex.theme42.toggleWidgets.expandWidget("nav");
+	else {
+		if (!isNavTreeOpen())
+			hideAllSublistsSearchNav();
+	}
 }
