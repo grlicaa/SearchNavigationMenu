@@ -1,4 +1,4 @@
-/*! searchNavMenu.js v1.2 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
+/*! searchNavMenu.js v1.3 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
 /* ==========================================================================
    Description
 	Script is used for Searching Navigation Menu in Oracle Application Express
@@ -52,11 +52,14 @@ function setCurrentNav(item_id) {
 }
 
 function isNavTreeOpen() {
-	if (apex.theme42.toggleWidgets.isExpanded("nav") == null) {
-		return $('body').hasClass('js-navExpanded');		
-	} 
-	else
+	try {
 		return apex.theme42.toggleWidgets.isExpanded("nav");
+	}
+	catch(e) {
+		apex.debug.info("apex.theme42.toggleWidgets.isExpanded('nav') dont exists  errormsg: "+e); 
+		return $('body').hasClass('js-navExpanded');
+	}
+	return false;
 }
 
 function saveSesSateNav(ajaxIdentifier, newVal) {
