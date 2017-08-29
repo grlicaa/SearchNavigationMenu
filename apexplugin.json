@@ -21,7 +21,7 @@
       "plugin" : {
         "internalName" : "si.abakus.searchnavigationmenu",
         "type" : "item",
-        "demo" : "https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU",
+        "demo" : "https://apex.oracle.com/pls/apex/f?p=111583",
         "previewImage" : "https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview.gif"
       }
     }
