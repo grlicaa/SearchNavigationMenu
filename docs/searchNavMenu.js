@@ -1,4 +1,4 @@
-/*! searchNavMenu.js v1.3 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
+/*! searchNavMenu.js v1.4 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
 /* ==========================================================================
    Description
 	Script is used for Searching Navigation Menu in Oracle Application Express
@@ -56,7 +56,7 @@ function isNavTreeOpen() {
 		return apex.theme42.toggleWidgets.isExpanded("nav");
 	}
 	catch(e) {
-		apex.debug.info("apex.theme42.toggleWidgets.isExpanded('nav') dont exists  errormsg: "+e); 
+		apex.debug.info("INFO: apex.theme42.toggleWidgets.isExpanded('nav') dont exists before apex 5.1 errormsg: "+e); 
 		return $('body').hasClass('js-navExpanded');
 	}
 	return false;
@@ -64,14 +64,18 @@ function isNavTreeOpen() {
 
 function saveSesSateNav(ajaxIdentifier, newVal) {
 	apex.server.plugin( ajaxIdentifier, {
-    x01: newVal
-    }, {dataType:"text", 
-       success: function( pData ) {
-         apex.debug.info("Saved session state."); 
+		x01: newVal
+    }, {dataType:"json", 
+	    accept: "application/json",
+        success: function( pData ) {
+			if(pData.state == 'OK')
+				apex.debug.info("Saved session state.");  
+			else
+				apex.debug.error("Save session state for Search Navigation failed :"+JSON.stringify(pData) );
        },
        error: function( pData ) {
-         apex.debug.error("Save session state for Search Navigation failed :"+JSON.stringify(pData) ); 
-       }	   
+         apex.debug.error("Save session state for Search Navigation failed :"+JSON.stringify(pData) );
+       }
     }); 
 }
 

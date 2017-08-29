@@ -5,6 +5,12 @@ A demo application is available on apex.oracle.com<br/>
 https://apex.oracle.com/pls/apex/f?p=SEARCHNAVIGATIONMENU
 
 ## Changelog
+V 1.4.
+<ul>
+<li>Recrate Plugin for APEX 5.0</li>
+<li>Changed CSS for Font Awesome <br/> 
+If you use font apex define icon CCS "fa-search" for font awesome "fa-search font_awesome"</li>
+</ul>
 V 1.3.
 <ul>
 <li>Added new function JS regarding to 'isExpanded("nav")' error for apex 5.1.1</li>
