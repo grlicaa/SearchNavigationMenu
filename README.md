@@ -69,6 +69,7 @@ V 1.1.
 
 #### Apex Versions
 <ul>
+<li>Application Express 5.0.0</li>
 <li>Application Express 5.1.0</li>
 <li>Application Express 5.1.1</li>
 <li>Application Express 5.1.2</li>
