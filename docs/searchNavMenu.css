@@ -1,23 +1,19 @@
-/*! searchNavMenu.css v1.4 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
+/*! searchNavMenu.css v2.0 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
 /* ==========================================================================
-   Date : 29.08.2017
    -------------------------------------------------------------------------------
    Description
 	Used for Searching Navigation Menu Style Sheet in Oracle Application Express
    ------------------------------------------------------------------------------- 
 */ 
 
-
 .srch_nav {
 	position:relative;
     width:95%;
 	margin: 4px;	
 }
-
 .srch_icon {
 	font-size: 20px;
 }
-
 .srch_nav span {
 	position: absolute;
 	display: block;
@@ -37,13 +33,28 @@
 .srch_nav input:focus {
 	outline: 0;
 }
-
 body.js-navCollapsed div.srch_nav  {
 	display:none;
 }
-
 body.js-navExpanded div.srch_nav  {
 	display:block;
 }
 
-
+/* HELP modal dialog */
+.srch_modal {
+	position:fixed !important;
+}
+.srch_modal span.ui-dialog-title {
+    font-size:20px !important;
+    font-weight:bold !important;
+}
+.srch_modal table td.td_right {
+    text-align:right;
+}
+.srch_modal table tr.tr_bg td {
+    font-weight:bold;
+    background-color:#e6e6e6;
+}
+.srch_modal table tr td {
+    padding:2px;
+}

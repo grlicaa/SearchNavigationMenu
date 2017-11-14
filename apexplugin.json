@@ -1,8 +1,8 @@
 {
   "name" : "Search Navigation Menu",
-  "version" : "1.4",
+  "version" : "2.0",
   "description" : "Oracle Application Express item Plug-in for search on Navigation Menu.",
-  "keywords" : ["search", "navigation", "menu", "list"],
+  "keywords" : ["search", "navigation", "menu", "list", "shortcut", "shortcuts"],
   "homepage" : "https://github.com/grlicaa/SearchNavigationMenu",
   "license" : "MIT",
   "author" : {
@@ -17,12 +17,12 @@
   "oracle" : {
     "versions" : ["12.2.0.1", "12.1.0.1", "11.2.0.1"],
     "apex" : {
-      "versions" : ["5.0.0", "5.0.1", "5.0.2", "5.0.3", "5.0.4", "5.1.0", "5.1.1", "5.1.2"],
+      "versions" : ["5.0.0", "5.0.1", "5.0.2", "5.0.3", "5.0.4", "5.1.0", "5.1.1", "5.1.2", "5.1.3"],
       "plugin" : {
         "internalName" : "si.abakus.searchnavigationmenu",
         "type" : "item",
         "demo" : "https://apex.oracle.com/pls/apex/f?p=111583",
-        "previewImage" : "https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview.gif"
+        "previewImage" : "https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview2.gif"
       }
     }
   }
