@@ -84,7 +84,7 @@ function LoadSearchNavMenu(item_id, menuOptions, ajaxIdentifier, l_skey, elmVal)
 			shortCutSearchNav(e, l_skey);
         });	
 		
-	addModalSNM("SNM_Help", "Search Navigation Menu HELP");
+	addModalSNM("SNM_Help", "Search Navigation Menu Help");
 	
 	//---- On document ready	
 	$(function() {
