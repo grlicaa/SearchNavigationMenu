@@ -1,26 +1,31 @@
 /*! searchNavMenu.js v2.0 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
+
 /* ==========================================================================
-   Description
-	Script is used for Searching Navigation Menu in Oracle Application Express
+
+   Description:
+	Script is used for Search Navigation Menu in Oracle Application Express
+	
    -------------------------------------------------------------------------------
-   Parametrs : 
-     item_id : item id from apex
-     menuOptions : (additional menu options)
-	 elm : object
-	 e: event
-	 ajaxIdentifier: name of ajax call function
-	 l_skey : character keypress focus on search
- 
-*/ 
+	
+	Parameters : 
+		item_id = item id from apex
+		menuOptions = (additional menu options)
+		elm = object
+		e = event
+		ajaxIdentifier = name of ajax call function
+		l_skey = character keypress focus on search
+*/
 
 var SNMClosed = false;
-var SNMOptions = {	"MenuOpen":false,   
-					 "MenuClickOpenClose":true, 
-					 "SaveSS":true,
-					 "ShortcutSaveSS":false,
-					 "ShrtCaseSensitive":true,
-					 "Shortcuts" : []
-				 };
+var SNMOptions =
+				{
+					"MenuOpen": false,
+					"MenuClickOpenClose": true,
+					"SaveSS": true,
+					"ShortcutSaveSS": false,
+					"ShrtCaseSensitive": true,
+					"Shortcuts": []
+				};
 
 function setSNMShortcuts(p_shortcuts) {
 	SNMOptions.Shortcuts = p_shortcuts;
@@ -38,35 +43,41 @@ function LoadSearchNavMenu(item_id, menuOptions, ajaxIdentifier, l_skey, elmVal)
 	if (menuOptions)
 		SNMOptions = menuOptions;
 
-	SNMOptions.ajaxId = ajaxIdentifier; 
-	SNMOptions.ItemId = item_id; 
+	SNMOptions.ajaxId = ajaxIdentifier;
+	SNMOptions.ItemId = item_id;
 	if (SNMOptions.MenuClickOpenClose)
-		$("#t_Body_nav #t_TreeNav").on("click", "ul li.a-TreeView-node div.a-TreeView-content:not(:has(a))", function(){
+		$("#t_Body_nav #t_TreeNav").on("click", "ul li.a-TreeView-node div.a-TreeView-content:not(:has(a))", function() {
 			$(this).prev("span.a-TreeView-toggle").click();
-		});	
+		});
 		
 	if (SNMOptions.SaveSS)
-		$("input.srch_input").val(elmVal);		
+		$("input.srch_input").val(elmVal);
 	
-    //Add event's on item
+    // Add events on items
     //----- KeyDOWN
     $("input.srch_input").keydown(function(e) {
 		keyDownSearchNav($(this), e);
+		// Display children under parent node. This can be removed.
+		$('li[id^="t_TreeNav"].is-expandable[style="display: block;"]').children("ul").children("li").each(function () {$(this).css("display", "block"); });
     });
     
 	//----- KeyUP
     $("input.srch_input").keyup(function(e, pageEvent) {
 		keyUpSearchNav($(this), e, pageEvent);
-    });                              
+		 // Display children under parent node. This can be removed.
+		$('li[id^="t_TreeNav"].is-expandable[style="display: block;"]').children("ul").children("li").each(function () {$(this).css("display", "block"); });
+    });
 
-    //----- Click on input bar pervent default "Chrome problem"
-    $("input.srch_input").on("click", function(e){e.preventDefault(); return false;});
+    //----- Click on input bar, prevent default "Chrome problem".
+    $("input.srch_input").on("click", function(e) {
+		 	e.preventDefault(); return false;
+	 });
  
     apex.jQuery(window).on("apexwindowresized", function(e) {
             onResizeWinSearchNav();
     });
 
-    //    ----- Focus combination Crt + *user selectet key defolt s
+    //    ----- Keybind to focus on Search Box. Ctrl + User Selected Key (Default = S)
     if (l_skey)
 		SNMOptions.skey = l_skey;
 		$(document).on("keydown", function(e){
@@ -77,15 +88,19 @@ function LoadSearchNavMenu(item_id, menuOptions, ajaxIdentifier, l_skey, elmVal)
 	
 	//---- On document ready	
 	$(function() {
+		var currItem = document.activeElement;
 		if (!isNavTreeOpen())
 			SNMClosed=true;
 		openAllNavSubmenus();
 		$('li[id^="t_TreeNav"].is-collapsible').find('span.a-TreeView-toggle').click(); 
-		//Because all list were open and last one closed we need to open current list
+		//Because all list were open and last one closed, we need to open current list
 		setCurrentNav(item_id);
 
 		if (SNMOptions.MenuOpen)
 			showAllSublistsSearchNav();
+	
+		currItem.focus();
+			
 	});	
 }
 
@@ -120,7 +135,7 @@ function isNavTreeOpen() {
 		return apex.theme42.toggleWidgets.isExpanded("nav");
 	}
 	catch(e) {
-		apex.debug.info("INFO: apex.theme42.toggleWidgets.isExpanded('nav') dont exists before apex 5.1 errormsg: "+e); 
+		apex.debug.info("Error: apex.theme42.toggleWidgets.isExpanded('nav') doesn't exist before Oracle APEX 5.1 errormsg: "+e); 
 		return $('body').hasClass('js-navExpanded');
 	}
 	return false;
@@ -155,10 +170,10 @@ function saveSesSateNav(newVal, redirectURL, pNewWindow) {
 					redirectUrlSNM(redirectURL, pNewWindow);
 				}
 				else
-					apex.debug.error("Save session state for Search Navigation failed :"+JSON.stringify(pData) );
+					apex.debug.error("Saving the session state for Search Navigation failed: "+JSON.stringify(pData) );
 		   },
 		   error: function( pData ) {
-			 apex.debug.error("Save session state for Search Navigation failed :"+JSON.stringify(pData) );
+			 apex.debug.error("Saving the session state for Search Navigation failed: "+JSON.stringify(pData) );
 		   }
 		}); 
 	}
@@ -200,7 +215,7 @@ function hoverSearchNav() {
 }
 
 function stepNextSearchNav(reverse) {
-    var obj = $('li[id^="t_TreeNav_"] div.is-hover'), newObj, flg; //flg for flag next objext
+    var obj = $('li[id^="t_TreeNav_"] div.is-hover'), newObj, flg; //flg for flag next object
     if (obj[0]) {
         obj.removeClass("is-hover");
         $('li[id^="t_TreeNav_"][style*="display: block"] a.a-TreeView-label strong').each(function() {
@@ -337,21 +352,22 @@ function checkAndRedirectSNM(elm) {
 		find_shortcut = redirectSNM();
 }
 
-/*  EVENTS........ */
+/*  EVENTS  */
 
 function addModalSNM(name, title) {
 	$('body').append('<div id="'+name+'" />')
 	
 	$("#"+name).dialog(
-		{"modal" : true
-		,"title" : title
-		,"autoOpen":false
-		,"resizable":true
-		,"dialogClass": "no-close srch_modal"
-		,"width" : '500px'
-		,"closeOnEscape" : true
-		,buttons : {
-				"Close" : function () {
+		{
+			"modal" : true,
+			"title" : title,
+			"autoOpen":false,
+			"resizable":true,
+			"dialogClass": "no-close srch_modal",
+			"width" : '500px',
+			"closeOnEscape" : true,
+			buttons: {
+				"Close": function () {
 					$(this).dialog("close");
 				}
 			}
@@ -361,19 +377,19 @@ function addModalSNM(name, title) {
 
 function openModalSNM(name, p_msg) {
 	$("#"+name)
-	.css('margin','12px') // tidy the messsage within the dialog
-	.html(p_msg) // define the actual message
-	.dialog('open'); // open the dialog
+	.css('margin','12px') // Make dialog text easier to read.
+	.html(p_msg) // Generate the message.
+	.dialog('open'); // Open the dialog.
 }
 
 function getHelpSNM() {
 	var l_return = "<h3>Shortcuts :</h3>";
 	l_return +="<table>";
-	l_return +="<tr><td class=\"td_right\"><strong>CRTL+"+SNMOptions.skey+" :</strong></td><td colspan=\"4\">Focus on search box item</td></tr>";
-	l_return +="<tr><td class=\"td_right\"><strong>F1 :</strong></td><td colspan=\"4\">Opens search navigation menu help page</td></tr>";
+	l_return +="<tr><td class=\"td_right\"><strong>CTRL+"+SNMOptions.skey+" :</strong></td><td colspan=\"4\">Focus on Search Box</td></tr>";
+	l_return +="<tr><td class=\"td_right\"><strong>F1:</strong></td><td colspan=\"4\">Opens the Search Navigation Menu help.</td></tr>";
 	
 	if (!jQuery.isEmptyObject(SNMOptions.Shortcuts)) {
-		   l_return +="<tr class=\"tr_bg\"><td>Shortcut label</td><td>Type</td><td>Condition</td><td>Example (type in)</td></tr>";
+		   l_return +="<tr class=\"tr_bg\"><td>Shortcut Label</td><td>Type</td><td>Condition</td><td>Example (type in)</td></tr>";
 		for(var i=0; i<SNMOptions.Shortcuts.length; i++) {
 			l_return +="<tr><td><strong>"+SNMOptions.Shortcuts[i].name+"</strong></td><td>"+SNMOptions.Shortcuts[i].action+"</td>";
 			l_return +="<td>";
@@ -489,6 +505,7 @@ function keyUpSearchNav(elm, e, pageEvent) {
 		if (!pageEvent)
 			saveSesSateNav(elmVal); 
 		hoverSearchNav();
+		$f_First_field();
 	}    
 }
 
