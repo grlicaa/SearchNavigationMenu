@@ -11,23 +11,22 @@ https://apex.oracle.com/pls/apex/f?p=111583
 ## Change log
 V 2.0.
 <ul>
-<li>Added "Shortcuts" URL based search</li>  
-<li>Added help for "Shortcuts" (press F1 while focused on item).</li>  
-<li>Added functions "" to manipulate with shortcuts.</li>
-<li>Added Style section in options so you can move style inside theme (optional).</li>
+<li>Added "Shortcuts": URL based search</li>  
+<li>Added help for "Shortcuts" (F1 whilst Search Box is active).</li>  
+<li>Added functions to manipulate shortcuts.</li>
 <li>Options moved to JSON structure.</li>
-<li>Added Style section in options so you can move style inside theme (optional).</li>
-<li>Added documentation and help inside every option.</li>  
+<li>Added Style section in Options (optional).</li>
+<li>Added further documentation</li>  
 </ul>
 V 1.4.
 <ul>
-<li>Re-crated Plugin for APEX 5.0</li>
-<li>Changed CSS for Font Awesome <br/>
-If you use font apex define icon CCS "fa-search" for font awesome "fa-search font_awesome"</li>
+<li>Re-created Plugin for APEX 5.0</li>
+<li>Changed CSS to Font Awesome<br/>
+If you use Font APEX define icon CSS "fa-search" for Font Awesome "fa-search font_awesome"</li>
 </ul>
 V 1.3.
 <ul>
-<li>Added new function JS regarding to 'isExpanded("nav")' error for apex 5.1.1</li>
+<li>Added new function JS regarding 'isExpanded("nav")' error for apex 5.1.1</li>
 </ul>
 V 1.2.
 <ul>
@@ -53,7 +52,6 @@ V 1.1.
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/hide_region.png)
 </li>
 <li>Decide options and style of the item (or leave default values).
-
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Settings.menu.png)
 </li>
 <li>Save changes. Search Navigation Menu is now ready to use.</li>
