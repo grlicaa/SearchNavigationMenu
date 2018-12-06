@@ -1,4 +1,4 @@
-# SearchNavigationMenu
+# SearchNavigationMenu (SNM)
 
 ## Demo
 A demo application is available on apex.oracle.com<br/>
@@ -11,23 +11,22 @@ https://apex.oracle.com/pls/apex/f?p=111583
 ## Change log
 V 2.0.
 <ul>
-<li>Added "Shortcuts" URL based search</li>  
-<li>Added help for "Shortcuts" (press F1 while focused on item).</li>  
-<li>Added functions "" to manipulate with shortcuts.</li>
-<li>Added Style section in options so you can move style inside theme (optional).</li>
+<li>Added "Shortcuts": URL based search</li>  
+<li>Added help for "Shortcuts" (F1 whilst Search Box is active).</li>  
+<li>Added functions to manipulate shortcuts.</li>
 <li>Options moved to JSON structure.</li>
-<li>Added Style section in options so you can move style inside theme (optional).</li>
-<li>Added documentation and help inside every option.</li>  
+<li>Added Style section in Options (optional).</li>
+<li>Added further documentation</li>  
 </ul>
 V 1.4.
 <ul>
-<li>Re-crated Plugin for APEX 5.0</li>
-<li>Changed CSS for Font Awesome <br/>
-If you use font apex define icon CCS "fa-search" for font awesome "fa-search font_awesome"</li>
+<li>Re-created Plugin for APEX 5.0</li>
+<li>Changed CSS to Font Awesome<br/>
+If you use Font APEX define icon CSS "fa-search" for Font Awesome "fa-search font_awesome"</li>
 </ul>
 V 1.3.
 <ul>
-<li>Added new function JS regarding to 'isExpanded("nav")' error for apex 5.1.1</li>
+<li>Added new function JS regarding 'isExpanded("nav")' error for apex 5.1.1</li>
 </ul>
 V 1.2.
 <ul>
@@ -47,22 +46,21 @@ V 1.1.
 <ol>
 <li>Import plug-in "item_type_plugin_si_abakus_searchnavigationmenu.sql" into your application.</li>
 <li>Add region on global page.
-(Region must be on page but you can hide it with style="display:none;" in "Custom Attributes")</li>
+(Region must be on page but you can hide it with style="display:none;" in "Custom Attributes")
+(Recommend to also set the condition of this region to not display on your Login Page</li>
 <li>Add SearchNavigationMenu [Plug-in] item to the region.
-
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/hide_region.png)
 </li>
 <li>Decide options and style of the item (or leave default values).
-
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Settings.menu.png)
 </li>
 <li>Save changes. Search Navigation Menu is now ready to use.</li>
-<li>Please leave same feedback. Thanks</li>
+<li>Please leave some feedback. Thanks!</li>
 </ol>
 
 ### Replace existing plug-in
-Because replacing, default options are inherited from privies version of plug-in.<br>
-Please, set new Options and Styles for item. You can use examples in help section.
+Because you are replacing the plug-in, the default options are inherited from the previous installation of the plug-in.<br>
+Please set new Options and Styles for the item. You can use examples in help section.
 
 
 
@@ -70,35 +68,35 @@ Please, set new Options and Styles for item. You can use examples in help sectio
 
 ### Implemented
 <ul>
-<li>Search is not case sensitive</li>
-<li>Search works on sub lists also</li>
-<li>Search adds style option color,background and weight(user choice) on first match in String</li>
-<li>Added functionality to navigation menu without target</li>
-<li>"Control+s" focus on search navigation</li>
-<li>"Enter" in search navigation redirect on selected link</li>
-<li>Keys up and down in search navigation move searched text link</li>
-<strong>New 2.0 version: </strong>
+<li>Search is not case sensitive.</li>
+<li>Search works on sub lists also.</li>
+<li>Search adds style option for color, background and weight(user choice) on first match in String.</li>
+<li>Added functionality to SNM without target.</li>
+<li>"CTRL+S" is the default keybind to focus on SNM.</li>
+<li>"Enter" in SNM redirects to selected navigation item.</li>
+<li>Keys UP and DOWN can be used during searching to select different nav items.</li>
+<strong>New in V2.0: </strong>
 <li>Added shortcuts</li>
-<li>While focused on search box (F1 key) opens search navigation help</li>
+<li>When focused on the Search Box, pressing F1 will open the help page.</li>
 </ul>
 
-### Recomemded functions
+### Recommended Functions:
 ```javascript
-    setSNMShortcuts(p_shortcuts_array);   //Add new set of shortcuts
-    appendSNMShortcut(p_shortcut_object); // Add one shortcut on shortcuts array
-    openModalSNMHelp();                   //open help same as pressing F1 key
+    setSNMShortcuts(p_shortcuts_array);   // Add multiple new shortcuts to the array.
+    appendSNMShortcut(p_shortcut_object); // Add one shortcut to the array.
+    openModalSNMHelp();                   // Open help menu, same as F1.
 ```
 
-### Tested on (so far):
+### Tested On (so far):
 
 #### Browsers
 <ul>
 <li>FireFox 54.0.1, 56.0.2</li>
-<li>Crome 59.0.3071.115, 60.0.3112.90</li>
+<li>Chrome 59.0.3071.115, 60.0.3112.90</li>
 <li>Microsoft Edge 38.14393.1066.0, 40.15063.0.0</li>
 </ul>
 
-#### Apex Versions
+#### Oracle APEX Versions
 <ul>
 <li>Application Express 5.0</li>
 <li>Application Express 5.1</li>
@@ -106,66 +104,68 @@ Please, set new Options and Styles for item. You can use examples in help sectio
 
 ## Documentation
 
-### Option settings
-#### Main settings
+### Option Settings
+#### Default Settings
 <pre>
-{"MenuOpen":false,   
- "MenuClickOpenClose":true,
- "SaveSS":true,
- "ShortcutSaveSS":false,
- "ShrtCaseSensitive":true,
- "Shortcuts" : []
+{
+ "menuOpen": false,   
+ "MmenuClickOpenClose": true,
+ "saveSS": true,
+ "shortcutSaveSS": false,
+ "shortcutCaseSensitive": true,
+ "shortcuts": []
 }
 </pre>
-##### MenuOpen :
-Menu fully opened on load (not recommended)<br>
-##### MenuClickOpenClose :
-Default APEX behavior on navigation menu click is to open target page. Problem becomes when link don't have target. <br>
-In that case if you want to open sub-menu you need to click on "arrow down". <br>
-With this option enabled (set to "Yes") when user click on "no target" in navigation menu (title, icon or arrow) it opens sub-menu.
+##### MenuOpen:
+MMenu fully expanded on-load (Not Recommended)<br>
+##### MenuClickOpenClose:
+Default APEX behavior on navigation menu click is to open target page. This is a problem when the item doesn't have a target.<br>
+In that case, if you want to open a sub-menu you need to click on the "arrow down". <br>
+With this option set to true, when a user clicks on a "no target" nav item (title, icon or arrow) it instead opens the sub-menu.
 ##### SaveSS :
-SaveSS stands for Save Session State of item.<br>
+SaveSS stands for "Save Session State of item".<br>
 ##### ShortcutSaveSS :
-ShortcutSaveSS stands for Save Session State of item when shortcut has occurred.<br>
-User usually need only to open quick setting with shortcut and than empty search field.
-##### ShrtCaseSensitive :
-Shortcut can be case sensitive. Be aware this is setting only for shortcut name and not searching value.
+ShortcutSaveSS stands for "Save Session State of item when using a Shortcut".<br>
+##### ShortcutCaseSensitive :
+Shortcut can be made case-sensitive. Caution: This will only affect the shortcut, not the search string.
 
-#### Shortcuts :
-For more information on shortcut settings you can use <a href="https://apex.oracle.com/pls/apex/f?p=111583:400" target="_blank">SNM Shortcut modeler</a>.
-##### Common settings
+#### Shortcuts:
+For more information on shortcut settings, you can use <a href="https://apex.oracle.com/pls/apex/f?p=111583:400" target="_blank">SNM Shortcut Modeller</a>.
+##### Default Settings
 <pre>
-{  "name": "emp",
+{  
+  "name": "emp",
   "action": "page",
   "page_id": 300,
   "newWindow": false,
   "clearCache": true,
   "clearCacheList": "300,301,RIR",
   "example": "emp"
-}</pre>
-###### name :
-Name of shortcut. This is used for search engine to find action.<br>
-If user need to add parameter for IR or ITEM type shortcut search it can be done like below example.
+}
+</pre>
+###### Name:
+Name of shortcut. This is used for SNM to find the object.<br>
+This is useful if you want users to be able to search in specific items. See the example below:
 <pre>person:Andrej</pre>
-This means find shortcut "person" if action is IR or ITEM add search parameter value "Andrej".
-URL od PAGE action type don't take parameters only shortcuts.
-###### page_id :
-Page id is setting on what page we need search or redirect. If this option is null, engine takes current page.
-###### newWindow :
-This option means if we need to open search result in new window than we set this option to "true".<br>
-By default this option in "false".
-###### clearCache and clearCacheList :
-Depending of clearCache setting we add clear cache in search URL.<br>
-If clearCache option in set to "true" we put in link clearCacheList. If clearCacheList don't exists than we put page_id into clearCache zone.
-###### example :
-Here we can put example for user to demonstrate purpose of shortcut.<br>
-User can see this example by pressing F1 key on search box.
-###### action :
+This means: Find shortcut "person", if object is IR or ITEM add search parameter value "Andrej".
+URL of Page Objects don't take parameters, only shortcuts.
+###### Action :
 Depending on this setting engine decide what to do with shortcut. We have four basic actions types PAGE, IR, URL and ITEM.<br>
 Every type have his own properties and all of them have "Common settings".
-###### PAGE :
+###### page_id :
+Page ID is the value for the page you want the shortcut to focus on. If this option is null, SNM will search the active page.
+###### newWindow :
+This will open the search results in a New Window if set to true. The default is set to "false".<br>
+###### clearCache and clearCacheList :
+This setting will include "ClearCache" into the search URL if set to true.<br>
+If clearCache option in set to "true" the link is added to the clearCacheList. If the clearCacheList doesn't exist then page_id is placed in the clearCache zone.
+###### Example :
+Here we can create an example for the Help Menu.<br>
+User can see this example by pressing F1 whilst Search Box is active.
+###### PAGE:
 <pre>
-{ "name": "emp",
+{ 
+  "name": "emp",
   "action": "page",
   "page_id": 300,
   "newWindow": true,
@@ -173,11 +173,12 @@ Every type have his own properties and all of them have "Common settings".
   "clearCacheList": "RIR,300",
   "example":"emp"
 }</pre>
-Setting for PAGE actions are like common settings. We can define which page to redirect.<br>
-Options are clear cache, open in new window and example for user.
-###### IR :
+Setting for Page Objects are like default settings. We can define which page to redirect to.<br>
+Options are: Clear cache, open in new window and example (Help Menu).
+###### IR:
 <pre>
-{ "name": "person",
+{ 
+  "name": "person",
   "action": "IR",
   "IR_static_id": "EMP",
   "IR_type": "column",
@@ -188,16 +189,17 @@ Options are clear cache, open in new window and example for user.
   "page_id": 300,
   "example": "person:andrej"
 }</pre>
-<b>IR_static_id</b> if you have more than one IR on page.<br>
-<b>IR_type</b> row or column (if empty default is row).<br>
-<b>IR_column</b> if column define column.<br>
-<b>IR_value</b> if we don't add parameter than this is default value or it can be used for shortcut.<br>
-<b>IR_operator</b> C, EQ..<br>
-<b>IR_clearCache</b> CIR or RIR.<br>
-More about IR Linking on : https://docs.oracle.com/database/apex-5.1/HTMDB/linking-to-interactive-reports.htm#HTMDB30108
+<b>IR_static_id:</b> Static ID for IR, required if there are multiple IRs on the page.<br>
+<b>IR_type:</b> Row or Column (default is Row).<br>
+<b>IR_column:</b> Define the column name (or null)<br>
+<b>IR_value:</b> If this parameter isn't defined then this is the default value, or it can be used for the shortcut.<br>
+<b>IR_operator:</b> Operators: C, EQ, etc. See link below for more operators.<br>
+<b>IR_clearCache:</b> CIR or RIR.<br>
+For more information on IR Linking: https://docs.oracle.com/database/apex-5.1/HTMDB/linking-to-interactive-reports.htm#HTMDB30108
 ###### URL :
 <pre>
-{ "name": "google",
+{ 
+  "name": "google",
   "action": "url",
   "url": "http://google.com",
   "newWindow": true
@@ -214,51 +216,51 @@ More about IR Linking on : https://docs.oracle.com/database/apex-5.1/HTMDB/linki
 }</pre>
 
 ### Style settings
-For more information on style settings you can use <a href="https://apex.oracle.com/pls/apex/f?p=111583:500" target="_blank">SNM Style modeler</a>.
+For more information on style settings you can use <a href="https://apex.oracle.com/pls/apex/f?p=111583:500" target="_blank">SNM Style Modeller</a>.
 <pre>
-/*
-** STYLE Settings for search navigation menu and menu icons
-*/
-/* FIX If you use FONT awesome enable this .srch_nav span */
+/* ** Style Settings for SNM (including icons) */
+
+/* FIX: If you use Font Awesome, enable to this fix Search Icon */
 /*
 .srch_nav span {
-   top:2px;
+   top: 2px;
 }
 */
-/* FIX If you use FONT awesome disable  this .t-TreeNav */
+/* FIX: If you use Font Awesome disable this .t-TreeNav */
+
 .t-TreeNav .a-TreeView-node--topLevel ul .a-TreeView-content .fa {
    vertical-align: top;
-   width: 32px; /* This can be decrease to have smaller spacing */
+   width: 32px;
    height: 32px;
    line-height: 32px;
    text-align: center;
    transition: width .2s ease;
 }
-/* Search resault setting */
+
+/* Search Result Style */
 .a-TreeView-label strong {
-    font-weight:bold;
-    color:black;
-    background-color:#ffef9a;
+    font-weight: bold;
+    color: black;
+    background-color: #ffef9a;
 }
-/* Input field style setting */
+/* Search Box Field Style */
 .srch_nav input {
-    color:black;
-    background-color:#f1f6fa;
-    border-color:#ededed;
+    color: black;
+    background-color: #f1f6fa;
+    border-color: #ededed;
 }
-/* Input field on hover setting */
+/* Search Box Margin when clicked */
 .srch_nav input:focus {
-    border-color:#ff7052;
+    border-color: #ff7052;
 }
 </pre>
 
 ## About me
 Andrej Grlica<br/>
 Company [Abakus Plus d.o.o.](http://abakus.si/en/home)<br/>
-I’m a oracle apex developer since 2008.<br/>
-When I’m not into code problem, you can find me on:<br/>
-Work email : [andrej.grlica@abakus.si](mailto:andrej.grlica@abakus.si)<br/>
-Private email : [andrej.grlica@gmail.com](mailto:andrej.grlica@gmail.com)<br/>
-Twitter : [@AndrejGrlica](https://twitter.com/AndrejGrlica)<br/>
-Linked-in : [Link](https://www.linkedin.com/in/andrej-grlica-303998a4/)<br/>
+I have been an Oracle APEX Developer since 2008<br/>
+When I'm not focusing on a code problem, you can find me on:<br/>
+Work Email : [andrej.grlica@abakus.si](mailto:andrej.grlica@abakus.si)<br/>
+Private Email : [andrej.grlica@gmail.com](mailto:andrej.grlica@gmail.com)<br/>
+LinkedIn: [Link](https://www.linkedin.com/in/andrej-grlica-303998a4/)<br/>
 Slack (#orclapex) PM:[@grlicaa](https://orclapex.slack.com/messages/@grlicaa/)
