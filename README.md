@@ -9,6 +9,19 @@ https://apex.oracle.com/pls/apex/f?p=111583
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview2.gif)
 
 ## Change log
+V 2.1.
+<ul>
+<li>Fixed FocusOnLoad problem <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/3" target="_blank">#3</a>.</li>  
+<li>Fixed sub menus problem (Hide/Show child) <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/7" target="_blank">#7</a>.</li>  
+<li>Fixed bug on IE ".startsWidth" <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/4" target="_blank">#4</a>.</li>
+<li>On IE now users can use clear imput property.</li>
+</ul>
+For upgrading to new version of SNM 2.1, please add next two following lines to your "Options"<br>
+<pre>
+ "OnSearchShowChildren":true,
+ "UseFocus":true,
+</pre> 
+
 V 2.0.
 <ul>
 <li>Added "Shortcuts": URL based search</li>  

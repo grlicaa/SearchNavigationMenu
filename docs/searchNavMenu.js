@@ -1,5 +1,4 @@
-/*! searchNavMenu.js v2.0 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
-
+/*! searchNavMenu.js v2.1 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
 /* ==========================================================================
 
    Description:
@@ -24,6 +23,8 @@ var SNMOptions =
 					"SaveSS": true,
 					"ShortcutSaveSS": false,
 					"ShrtCaseSensitive": true,
+					"OnSearchShowChildren": true,
+					"UseFocus":true,
 					"Shortcuts": []
 				};
 
@@ -39,39 +40,56 @@ function openModalSNMHelp() {
 	openModalSNM("SNM_Help", getHelpSNM());
 }
 
+function openSNMChildrenIfExists() {
+	if (SNMOptions.OnSearchShowChildren)
+		$('li[id^="t_TreeNav"].is-expandable[style="display: block;"]').children("ul").children("li").each(function () {
+			if ($(this).has( "strong" ).length || ($(this).has( "ul" ).length == false && $(this).has( "strong" ).length == false))
+				$(this).css("display", "block"); 
+		});
+		$('li[id^="t_TreeNav"].is-collapsible[style="display: block;"]').children("ul").children("li").each(function () {
+			if ($(this).has( "strong" ).length || ($(this).has( "ul" ).length == false && $(this).has( "strong" ).length == false))
+				$(this).css("display", "block"); 
+		});		
+}
+
 function LoadSearchNavMenu(item_id, menuOptions, ajaxIdentifier, l_skey, elmVal) {
 	if (menuOptions)
 		SNMOptions = menuOptions;
 
-	SNMOptions.ajaxId = ajaxIdentifier;
-	SNMOptions.ItemId = item_id;
+	SNMOptions.ajaxId = ajaxIdentifier; 
+	SNMOptions.ItemId = item_id; 
 	if (SNMOptions.MenuClickOpenClose)
 		$("#t_Body_nav #t_TreeNav").on("click", "ul li.a-TreeView-node div.a-TreeView-content:not(:has(a))", function() {
 			$(this).prev("span.a-TreeView-toggle").click();
-		});
+		});	
 		
 	if (SNMOptions.SaveSS)
-		$("input.srch_input").val(elmVal);
+		$("input.srch_input").val(elmVal);		
 	
-    // Add events on items
+    //Add events on items
     //----- KeyDOWN
     $("input.srch_input").keydown(function(e) {
 		keyDownSearchNav($(this), e);
-		// Display children under parent node. This can be removed.
-		$('li[id^="t_TreeNav"].is-expandable[style="display: block;"]').children("ul").children("li").each(function () {$(this).css("display", "block"); });
+		//openSNMChildrenIfExists();
     });
     
 	//----- KeyUP
     $("input.srch_input").keyup(function(e, pageEvent) {
 		keyUpSearchNav($(this), e, pageEvent);
-		 // Display children under parent node. This can be removed.
-		$('li[id^="t_TreeNav"].is-expandable[style="display: block;"]').children("ul").children("li").each(function () {$(this).css("display", "block"); });
-    });
+    }); 
 
+		
+	//----- Clear field IE problem, it's not on KEYUP
+	$("input.srch_input").bind('input propertychange', function(e, pageEvent) {
+		if (this.value == "") {
+			setCurrentNav(item_id);
+			if (!pageEvent)
+				saveSesSateNav(""); 
+		}
+	});
+	
     //----- Click on input bar, prevent default "Chrome problem".
-    $("input.srch_input").on("click", function(e) {
-		 	e.preventDefault(); return false;
-	 });
+    $("input.srch_input").on("click", function(e){e.preventDefault(); return false;});
  
     apex.jQuery(window).on("apexwindowresized", function(e) {
             onResizeWinSearchNav();
@@ -84,7 +102,7 @@ function LoadSearchNavMenu(item_id, menuOptions, ajaxIdentifier, l_skey, elmVal)
 			shortCutSearchNav(e, l_skey);
         });	
 		
-	addModalSNM("SNM_Help", "Search Navigation Menu Help");
+	addModalSNM("SNM_Help", "Search Navigation Menu HELP");
 	
 	//---- On document ready	
 	$(function() {
@@ -93,14 +111,14 @@ function LoadSearchNavMenu(item_id, menuOptions, ajaxIdentifier, l_skey, elmVal)
 			SNMClosed=true;
 		openAllNavSubmenus();
 		$('li[id^="t_TreeNav"].is-collapsible').find('span.a-TreeView-toggle').click(); 
-		//Because all list were open and last one closed, we need to open current list
+		//Because all list were open and last one closed we need to open current list
 		setCurrentNav(item_id);
-
+		
 		if (SNMOptions.MenuOpen)
 			showAllSublistsSearchNav();
-	
-		currItem.focus();
-			
+
+		if (SNMOptions.UseFocus)
+			currItem.focus();
 	});	
 }
 
@@ -116,13 +134,16 @@ function openAllNavSubmenus(elm) {
 
 function setCurrentNav(item_id) {
 	$('li[id^="t_TreeNav"]').each( function(){
-        if ($(this).find("div.a-TreeView-content").hasClass("is-current")) {
-            $(this).find("div.a-TreeView-row").addClass("is-selected");
+        if ($(this).find("div.a-TreeView-content:first").hasClass("is-current")) {
+            $(this).find("div.a-TreeView-row:first").addClass("is-selected");
             if ($(this).hasClass("is-expandable"))
-                $(this).find("span.a-TreeView-toggle").click();  
+                $(this).find("span.a-TreeView-toggle:first").click();  
        }
+	   else if ($(this).find("div.a-TreeView-content:first").hasClass("is-current--top")) {
+			$(this).find("span.a-TreeView-toggle:first").click(); 
+	   }
        else
-           $(this).find("div.a-TreeView-row").removeClass("is-selected");
+           $(this).find("div.a-TreeView-row:first").removeClass("is-selected");
     });
 	if (SNMClosed)
 		$('#t_Button_navControl').click();
@@ -144,7 +165,7 @@ function isNavTreeOpen() {
 function redirectUrlSNM(redirectURL, pNewWindow) {
 	if (redirectURL && !pNewWindow) {
 		window.location.href = redirectURL;
-		if (!SNMOptions.ShortcutSaveSS && redirectURL.toLowerCase().startsWith('javascript:')) {
+		if (!SNMOptions.ShortcutSaveSS && redirectURL.toLowerCase().indexOf("javascript:") == 0) {
 			$("input.srch_input").val("");
 			setCurrentNav(SNMOptions.ItemId);
 		}
@@ -170,7 +191,7 @@ function saveSesSateNav(newVal, redirectURL, pNewWindow) {
 					redirectUrlSNM(redirectURL, pNewWindow);
 				}
 				else
-					apex.debug.error("Saving the session state for Search Navigation failed: "+JSON.stringify(pData) );
+					apex.debug.error("Saving the session state for Search Navigation failed: "+JSON.stringify(pData)  );
 		   },
 		   error: function( pData ) {
 			 apex.debug.error("Saving the session state for Search Navigation failed: "+JSON.stringify(pData) );
@@ -255,7 +276,7 @@ function parseSNMShortcut(obj, elmVal) {
 				l_clearCache = l_page_id; 
 		
 		if (obj.action.toLowerCase() == "page" && !elmVal) 
-			retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+"::NO:"+l_clearCache+"::"
+			retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+":::"+l_clearCache+"::"
 		else if (obj.action.toLowerCase() == "url" && !elmVal) {
 			if (obj.url)
 				retURL = obj.url;
@@ -285,19 +306,19 @@ function parseSNMShortcut(obj, elmVal) {
 					l_clearCache = obj.IR_clearCache;				
 			}
 			if (elmVal)
-				retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+"::NO:"+l_clearCache+":"+ir_link+":"+elmVal;
+				retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+":::"+l_clearCache+":"+ir_link+":"+elmVal;
 			else
 				if ("IR_value" in obj)	
-					retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+"::NO:"+l_clearCache+":"+ir_link+":"+obj.IR_value;
+					retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+":::"+l_clearCache+":"+ir_link+":"+obj.IR_value;
 		}		
 		else if (obj.action.toLowerCase() == "item") {
 			if (elmVal) {
 				if ("item_name" in obj)	
-					retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+"::NO:"+l_clearCache+":"+obj.item_name+":"+elmVal;
+					retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+":::"+l_clearCache+":"+obj.item_name+":"+elmVal;
 			}
 			else 
 				if ("item_name" in obj && "item_value" in obj)
-					retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+"::NO:"+l_clearCache+":"+obj.item_name+":"+obj.item_value;			
+					retURL = "f?p="+$v("pFlowId")+":"+l_page_id+":"+$v("pInstance")+":::"+l_clearCache+":"+obj.item_name+":"+obj.item_value;			
 		}	
 	}
 	if (retURL)
@@ -341,8 +362,8 @@ function checkAndRedirectSNM(elm) {
 			if ((SNMOptions.Shortcuts[i].name == elmVal && caseSensitive) || (SNMOptions.Shortcuts[i].name.toLowerCase() == elmVal.toLowerCase() && !caseSensitive)) {
 				find_shortcut = redirectSNM(SNMOptions.Shortcuts[i]);
 			}
-			else if ((elmVal.startsWith(SNMOptions.Shortcuts[i].name+":") && caseSensitive) ||
-					 (elmVal.toLowerCase().startsWith(SNMOptions.Shortcuts[i].name.toLowerCase()+":") && !caseSensitive)) {
+			else if ((elmVal.indexOf(SNMOptions.Shortcuts[i].name+":") == 0 && caseSensitive) ||
+					 (elmVal.toLowerCase().indexOf(SNMOptions.Shortcuts[i].name.toLowerCase()+":") == 0  && !caseSensitive)) {
 					find_shortcut = redirectSNM(SNMOptions.Shortcuts[i], true, elmVal);
 			}
 			if (find_shortcut) { break; }
@@ -352,22 +373,21 @@ function checkAndRedirectSNM(elm) {
 		find_shortcut = redirectSNM();
 }
 
-/*  EVENTS  */
+/*  EVENTS........ */
 
 function addModalSNM(name, title) {
 	$('body').append('<div id="'+name+'" />')
 	
 	$("#"+name).dialog(
-		{
-			"modal" : true,
-			"title" : title,
-			"autoOpen":false,
-			"resizable":true,
-			"dialogClass": "no-close srch_modal",
-			"width" : '500px',
-			"closeOnEscape" : true,
-			buttons: {
-				"Close": function () {
+		{"modal":true
+		,"title":title
+		,"autoOpen":false
+		,"resizable":true
+		,"dialogClass":"no-close srch_modal"
+		,"width":'500px'
+		,"closeOnEscape":true
+		,buttons : {
+				"Close" : function () {
 					$(this).dialog("close");
 				}
 			}
@@ -385,11 +405,11 @@ function openModalSNM(name, p_msg) {
 function getHelpSNM() {
 	var l_return = "<h3>Shortcuts :</h3>";
 	l_return +="<table>";
-	l_return +="<tr><td class=\"td_right\"><strong>CTRL+"+SNMOptions.skey+" :</strong></td><td colspan=\"4\">Focus on Search Box</td></tr>";
-	l_return +="<tr><td class=\"td_right\"><strong>F1:</strong></td><td colspan=\"4\">Opens the Search Navigation Menu help.</td></tr>";
+	l_return +="<tr><td class=\"td_right\"><strong>CTRL+"+SNMOptions.skey+" :</strong></td><td colspan=\"4\">Focus on search box item</td></tr>";
+	l_return +="<tr><td class=\"td_right\"><strong>F1 :</strong></td><td colspan=\"4\">Opens search navigation menu help page</td></tr>";
 	
 	if (!jQuery.isEmptyObject(SNMOptions.Shortcuts)) {
-		   l_return +="<tr class=\"tr_bg\"><td>Shortcut Label</td><td>Type</td><td>Condition</td><td>Example (type in)</td></tr>";
+		   l_return +="<tr class=\"tr_bg\"><td>Shortcut label</td><td>Type</td><td>Condition</td><td>Example (type in)</td></tr>";
 		for(var i=0; i<SNMOptions.Shortcuts.length; i++) {
 			l_return +="<tr><td><strong>"+SNMOptions.Shortcuts[i].name+"</strong></td><td>"+SNMOptions.Shortcuts[i].action+"</td>";
 			l_return +="<td>";
@@ -505,7 +525,10 @@ function keyUpSearchNav(elm, e, pageEvent) {
 		if (!pageEvent)
 			saveSesSateNav(elmVal); 
 		hoverSearchNav();
-		$f_First_field();
+		openSNMChildrenIfExists();
+		if (SNMOptions.UseFocus)
+			$f_First_field();
+		
 	}    
 }
 
