@@ -126,6 +126,8 @@ Please set new Options and Styles for the item. You can use examples in help sec
  "saveSS": true,
  "shortcutSaveSS": false,
  "shortcutCaseSensitive": true,
+ "OnSearchShowChildren":true,
+ "UseFocus":true,
  "shortcuts": []
 }
 </pre>
