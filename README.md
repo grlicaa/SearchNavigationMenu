@@ -14,7 +14,7 @@ V 2.1.
 <li>Fixed FocusOnLoad problem <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/3" target="_blank">#3</a>.</li>  
 <li>Fixed sub menus problem (Hide/Show child) <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/7" target="_blank">#7</a>.</li>  
 <li>Fixed bug on IE ".startsWidth" <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/4" target="_blank">#4</a>.</li>
-<li>On IE now users can use clear imput property.</li>
+<li>On IE now users can use clear text input property.</li>
 </ul>
 For upgrading to new version of SNM 2.1, please add next two following lines to your "Options"<br>
 <pre>
