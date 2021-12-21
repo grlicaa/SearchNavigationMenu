@@ -1,4 +1,4 @@
-/*! searchNavMenu.js v2.1 | ABAKUS PLUS d.o.o. | Andrej Grlica | andrej.grlica@abakus.si */
+/*! searchNavMenu.js v2.2 |  Andrej Grlica | andrej.grlica@right-thing.solutions */
 /* ==========================================================================
 
    Description:
@@ -41,15 +41,16 @@ function openModalSNMHelp() {
 }
 
 function openSNMChildrenIfExists() {
-	if (SNMOptions.OnSearchShowChildren)
-		$('li[id^="t_TreeNav"].is-expandable[style="display: block;"]').children("ul").children("li").each(function () {
+	if (SNMOptions.OnSearchShowChildren) {
+		$('li[id^="t_TreeNav"].is-expandable[style="display: grid;"]').children("ul").children("li").each(function () {
 			if ($(this).has( "strong" ).length || ($(this).has( "ul" ).length == false && $(this).has( "strong" ).length == false))
-				$(this).css("display", "block"); 
+				$(this).css("display", "grid"); 
 		});
-		$('li[id^="t_TreeNav"].is-collapsible[style="display: block;"]').children("ul").children("li").each(function () {
+		$('li[id^="t_TreeNav"].is-collapsible[style="display: grid;"]').children("ul").children("li").each(function () {
 			if ($(this).has( "strong" ).length || ($(this).has( "ul" ).length == false && $(this).has( "strong" ).length == false))
-				$(this).css("display", "block"); 
+				$(this).css("display", "grid"); 
 		});		
+	}	
 }
 
 function LoadSearchNavMenu(item_id, menuOptions, ajaxIdentifier, l_skey, elmVal) {
@@ -82,9 +83,14 @@ function LoadSearchNavMenu(item_id, menuOptions, ajaxIdentifier, l_skey, elmVal)
 	//----- Clear field IE problem, it's not on KEYUP
 	$("input.srch_input").bind('input propertychange', function(e, pageEvent) {
 		if (this.value == "") {
+			var currItem = document.activeElement;
 			setCurrentNav(item_id);
 			if (!pageEvent)
 				saveSesSateNav(""); 
+			if (SNMOptions.UseFocus)
+				currItem.focus();			
+			else
+				$(this).focus();
 		}
 	});
 	
@@ -216,7 +222,7 @@ function hideAllSublistsSearchNav() {
 	$('li[id^="t_TreeNav"].is-expandable').find("ul").css("display", "none");
 }
 function showAllSublistsSearchNav() {
-	$('li[id^="t_TreeNav"].is-expandable').find("ul").css("display", "block");
+	$('li[id^="t_TreeNav"].is-expandable').find("ul").css("display", "grid");
 }
 
 function colorSearchNav(txt, rplStr) {
@@ -229,7 +235,7 @@ function colorSearchNav(txt, rplStr) {
 
 function hoverSearchNav() {
     $('li[id^="t_TreeNav_"] div.is-hover').removeClass("is-hover");
-    $('li[id^="t_TreeNav_"][style*="display: block"] a.a-TreeView-label strong').each(function() {
+    $('li[id^="t_TreeNav_"][style*="display: grid"] a.a-TreeView-label strong').each(function() {
         $(this).parents("li").eq(0).children("div").addClass("is-hover");
         return false;
     });
@@ -239,7 +245,7 @@ function stepNextSearchNav(reverse) {
     var obj = $('li[id^="t_TreeNav_"] div.is-hover'), newObj, flg; //flg for flag next object
     if (obj[0]) {
         obj.removeClass("is-hover");
-        $('li[id^="t_TreeNav_"][style*="display: block"] a.a-TreeView-label strong').each(function() {
+        $('li[id^="t_TreeNav_"][style*="display: grid"] a.a-TreeView-label strong').each(function() {
            if($(this).parents("li").eq(0).attr("id") == obj.parent("li").attr("id") && reverse)
                return false;
            else if (flg) {
@@ -344,7 +350,7 @@ function redirectSNM(obj, startWith, elmVal) {
 		}
 	}
 	else {	
-		rdr = $('li[id^="t_TreeNav_"][style*="display: block"] div.is-hover a.a-TreeView-label').attr("href");
+		rdr = $('li[id^="t_TreeNav_"][style*="display: grid"] div.is-hover a.a-TreeView-label').attr("href");
 		if (rdr) {
 			window.location.href = rdr;
 			return true;
@@ -505,11 +511,11 @@ function keyUpSearchNav(elm, e, pageEvent) {
 			 $('li[id^="t_TreeNav"]').each(function() {
 			   if ($(this).find(".a-TreeView-label").text().toLowerCase().indexOf(elmVal.toLowerCase())!= -1 ) {
 				   if ($(this).hasClass("is-expandable"))
-					   $(this).find("ul").css("display", "block");
+					   $(this).find("ul").css("display", "grid");
 				   $(this).find(".a-TreeView-label").each(function(){
 					   $(this).html(colorSearchNav($(this).text(),elmVal)); 
 				   });
-				   $(this).css("display", "block"); 
+				   $(this).css("display", "grid"); 
 			   }
 			   else
 				 $(this).css("display", "none");
@@ -519,16 +525,13 @@ function keyUpSearchNav(elm, e, pageEvent) {
 		   $('li[id^="t_TreeNav"]').each(function() {
 			  if ($(this).hasClass("is-expandable"))
 					  $(this).find("ul").css("display", "none");
-			  $(this).css("display", "block");
+			  $(this).css("display", "grid");
 		   });
 		}        
 		if (!pageEvent)
 			saveSesSateNav(elmVal); 
 		hoverSearchNav();
 		openSNMChildrenIfExists();
-		if (SNMOptions.UseFocus)
-			$f_First_field();
-		
 	}    
 }
 
@@ -545,7 +548,7 @@ function shortCutSearchNav(e, l_skey) {
 
 function onResizeWinSearchNav() {
 	if ($("input.srch_input").is(":focus"))
-               apex.theme42.toggleWidgets.expandWidget("nav");
+		$('.t-PageBody:not(.js-navExpanded) #t_Button_navControl').click();
 	else {
 		if (!isNavTreeOpen())
 			hideAllSublistsSearchNav();
