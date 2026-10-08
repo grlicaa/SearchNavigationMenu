@@ -24914,7 +24914,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_cSize=>30
 ,p_field_template=>2318601014859922299
 ,p_item_template_options=>'#DEFAULT#'
-,p_help_text=>'Get icons from : <a href="https://apex.oracle.com/pls/apex/f?p=42:4000:::NO:::" target="_blank">https://apex.oracle.com/pls/apex/f?p=42:4000:::NO:::</a>'
+,p_help_text=>'Get icons from : <a href="https://oracleapex.com/ords/r/apex_pm/ut/icons" target="_blank">https://oracleapex.com/ords/r/apex_pm/ut/icons</a>'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
   'disabled', 'N',

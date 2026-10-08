@@ -4,8 +4,8 @@ Oracle APEX item plug-in that adds a search box to the Universal Theme navigatio
 use shortcuts to jump to pages, Interactive Report filters, items or URLs.
 
 ## Demo
-A demo application is available on apex.oracle.com<br/>
-https://apex.oracle.com/pls/apex/f?p=111583
+A demo application is available on oracleapex.com<br/>
+https://oracleapex.com/ords/f?p=111583
 
 ## Preview
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview.gif)
@@ -183,7 +183,7 @@ While searching, also show the entries below a matching entry.
 Keep the focus where it was when the page loads.
 
 #### Shortcuts
-For more information on shortcut settings, you can use the <a href="https://apex.oracle.com/pls/apex/f?p=111583:400" target="_blank">SNM Shortcut Modeller</a>.
+For more information on shortcut settings, you can use the <a href="https://oracleapex.com/ords/f?p=111583:400" target="_blank">SNM Shortcut Modeller</a>.
 ##### Common Settings
 <pre>
 {
@@ -265,7 +265,7 @@ More about linking to Interactive Reports: https://docs.oracle.com/en/database/o
 }</pre>
 
 ### Style settings
-For more information on style settings you can use the <a href="https://apex.oracle.com/pls/apex/f?p=111583:500" target="_blank">SNM Style Modeller</a>.
+For more information on style settings you can use the <a href="https://oracleapex.com/ords/f?p=111583:500" target="_blank">SNM Style Modeller</a>.
 Default style of a new item in 3.0:
 <pre>
 /*
