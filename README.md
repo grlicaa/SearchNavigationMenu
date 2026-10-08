@@ -9,6 +9,15 @@ https://apex.oracle.com/pls/apex/f?p=111583
 ![](https://raw.githubusercontent.com/grlicaa/SearchNavigationMenu/master/docs/Preview2.gif)
 
 ## Change log
+V 2.2. (legacy line, Oracle APEX 5.0 – 24.2)
+<ul>
+<li>Removed the call to <code>$f_First_field</code>, which no longer exists in current APEX <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/10" target="_blank">#10</a>, <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/14" target="_blank">#14</a>.</li>
+<li>Replaced the removed <code>apex.theme42.toggleWidgets.expandWidget</code> call <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/11" target="_blank">#11</a>.</li>
+<li>Packages the <code>searchNavMenu.js</code> / <code>.css</code> 2.2 files from <code>docs/</code> (published there in Dec 2021, never packaged before).</li>
+</ul>
+The 2.2 plug-in is also kept in <code>plug-in/legacy/</code>, and its demo app is in <code>src/sample_app/legacy/</code>.<br>
+Upgrading from 2.1 needs no option changes.
+
 V 2.1.
 <ul>
 <li>Fixed FocusOnLoad problem <a href="https://github.com/grlicaa/SearchNavigationMenu/issues/3" target="_blank">#3</a>.</li>  
