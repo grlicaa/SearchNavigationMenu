@@ -25313,8 +25313,24 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_03=>'SELECT ''fa-search'', ''black'', ''Y'', ''bold'', ''black'', ''#ffef9a'', ''Y'', ''black'', ''#f1f6fa'', ''#ededed'', ''#ff7052'' FROM dual'
 ,p_attribute_07=>'P500_ICON,P500_ICON_COLOR,P500_COLOR_RESAULTS,P500_FONT_WEIGHT,P500_SEARCH_COLOR,P500_SEARCH_BG_COLOR,P500_COLOR_BOX,P500_BOX_COLOR,P500_BOX_BG_COLOR,P500_BOX_BORDER,P500_BOX_BORDER_HOVER'
 ,p_attribute_08=>'Y'
-,p_attribute_09=>'N'
+,p_attribute_09=>'Y'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(946026545597862401)
+,p_event_id=>wwv_flow_imp.id(946024566429862412)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'// Values above are set with change events suppressed, so the CSS is generated and saved once',
+'// (one change per item fired 11 racing saves). Every preset turns both coloring switches on.',
+'[''P500_FONT_WEIGHT'',''P500_SEARCH_COLOR'',''P500_SEARCH_BG_COLOR'',''P500_BOX_COLOR'',''P500_BOX_BG_COLOR'',''P500_BOX_BORDER'',''P500_BOX_BORDER_HOVER''].forEach(function (i) {',
+'    apex.item(i).show();',
+'});',
+'apex.event.trigger(''#P500_ICON'', ''change'');',
+'apex.event.trigger(''#P500_ICON_COLOR'', ''change'');'))
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(946025116512862417)
@@ -25339,8 +25355,24 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_03=>'SELECT ''fa-database-search'', ''black'', ''Y'', ''bold'', ''black'', ''#ffef9a'', ''Y'', ''black'', ''#DEF29E'', ''#1130F5'', ''#ff7052'' FROM dual'
 ,p_attribute_07=>'P500_ICON,P500_ICON_COLOR,P500_COLOR_RESAULTS,P500_FONT_WEIGHT,P500_SEARCH_COLOR,P500_SEARCH_BG_COLOR,P500_COLOR_BOX,P500_BOX_COLOR,P500_BOX_BG_COLOR,P500_BOX_BORDER,P500_BOX_BORDER_HOVER'
 ,p_attribute_08=>'Y'
-,p_attribute_09=>'N'
+,p_attribute_09=>'Y'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(946026545597862402)
+,p_event_id=>wwv_flow_imp.id(946025116512862417)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'// Values above are set with change events suppressed, so the CSS is generated and saved once',
+'// (one change per item fired 11 racing saves). Every preset turns both coloring switches on.',
+'[''P500_FONT_WEIGHT'',''P500_SEARCH_COLOR'',''P500_SEARCH_BG_COLOR'',''P500_BOX_COLOR'',''P500_BOX_BG_COLOR'',''P500_BOX_BORDER'',''P500_BOX_BORDER_HOVER''].forEach(function (i) {',
+'    apex.item(i).show();',
+'});',
+'apex.event.trigger(''#P500_ICON'', ''change'');',
+'apex.event.trigger(''#P500_ICON_COLOR'', ''change'');'))
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(946025611832862422)
@@ -25365,8 +25397,24 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_03=>'SELECT ''fa-flashlight'', ''white'', ''Y'', ''bold'', ''white'', ''#CC2929'', ''Y'', ''white'', ''#CC2929'', ''white'', ''#BFD1FF'' FROM dual'
 ,p_attribute_07=>'P500_ICON,P500_ICON_COLOR,P500_COLOR_RESAULTS,P500_FONT_WEIGHT,P500_SEARCH_COLOR,P500_SEARCH_BG_COLOR,P500_COLOR_BOX,P500_BOX_COLOR,P500_BOX_BG_COLOR,P500_BOX_BORDER,P500_BOX_BORDER_HOVER'
 ,p_attribute_08=>'Y'
-,p_attribute_09=>'N'
+,p_attribute_09=>'Y'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(946026545597862403)
+,p_event_id=>wwv_flow_imp.id(946025611832862422)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'// Values above are set with change events suppressed, so the CSS is generated and saved once',
+'// (one change per item fired 11 racing saves). Every preset turns both coloring switches on.',
+'[''P500_FONT_WEIGHT'',''P500_SEARCH_COLOR'',''P500_SEARCH_BG_COLOR'',''P500_BOX_COLOR'',''P500_BOX_BG_COLOR'',''P500_BOX_BORDER'',''P500_BOX_BORDER_HOVER''].forEach(function (i) {',
+'    apex.item(i).show();',
+'});',
+'apex.event.trigger(''#P500_ICON'', ''change'');',
+'apex.event.trigger(''#P500_ICON_COLOR'', ''change'');'))
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(946025852784862424)
@@ -25391,8 +25439,24 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_03=>'SELECT ''fa-folder-search'', ''#FAFA84'', ''Y'', ''bold'', ''#FAFA84'', ''#005912'', ''Y'', ''#FAFA84'', ''#005912'', ''#FAFA84'', ''#B56767'' FROM dual'
 ,p_attribute_07=>'P500_ICON,P500_ICON_COLOR,P500_COLOR_RESAULTS,P500_FONT_WEIGHT,P500_SEARCH_COLOR,P500_SEARCH_BG_COLOR,P500_COLOR_BOX,P500_BOX_COLOR,P500_BOX_BG_COLOR,P500_BOX_BORDER,P500_BOX_BORDER_HOVER'
 ,p_attribute_08=>'Y'
-,p_attribute_09=>'N'
+,p_attribute_09=>'Y'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(946026545597862404)
+,p_event_id=>wwv_flow_imp.id(946025852784862424)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'// Values above are set with change events suppressed, so the CSS is generated and saved once',
+'// (one change per item fired 11 racing saves). Every preset turns both coloring switches on.',
+'[''P500_FONT_WEIGHT'',''P500_SEARCH_COLOR'',''P500_SEARCH_BG_COLOR'',''P500_BOX_COLOR'',''P500_BOX_BG_COLOR'',''P500_BOX_BORDER'',''P500_BOX_BORDER_HOVER''].forEach(function (i) {',
+'    apex.item(i).show();',
+'});',
+'apex.event.trigger(''#P500_ICON'', ''change'');',
+'apex.event.trigger(''#P500_ICON_COLOR'', ''change'');'))
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(946026218839862428)
@@ -25417,8 +25481,24 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_03=>'SELECT ''fa-calendar-search'', ''#662E2E'', ''Y'', ''bold'', ''#662E2E'', ''#8CE0FF'', ''Y'', ''#662E2E'', ''#8CE0FF'', ''#662E2E'', ''#FFAE4A'' FROM dual'
 ,p_attribute_07=>'P500_ICON,P500_ICON_COLOR,P500_COLOR_RESAULTS,P500_FONT_WEIGHT,P500_SEARCH_COLOR,P500_SEARCH_BG_COLOR,P500_COLOR_BOX,P500_BOX_COLOR,P500_BOX_BG_COLOR,P500_BOX_BORDER,P500_BOX_BORDER_HOVER'
 ,p_attribute_08=>'Y'
-,p_attribute_09=>'N'
+,p_attribute_09=>'Y'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(946026545597862405)
+,p_event_id=>wwv_flow_imp.id(946026218839862428)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'// Values above are set with change events suppressed, so the CSS is generated and saved once',
+'// (one change per item fired 11 racing saves). Every preset turns both coloring switches on.',
+'[''P500_FONT_WEIGHT'',''P500_SEARCH_COLOR'',''P500_SEARCH_BG_COLOR'',''P500_BOX_COLOR'',''P500_BOX_BG_COLOR'',''P500_BOX_BORDER'',''P500_BOX_BORDER_HOVER''].forEach(function (i) {',
+'    apex.item(i).show();',
+'});',
+'apex.event.trigger(''#P500_ICON'', ''change'');',
+'apex.event.trigger(''#P500_ICON_COLOR'', ''change'');'))
 );
 end;
 /
